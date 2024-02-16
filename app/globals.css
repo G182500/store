@@ -3,25 +3,54 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --card-background-rgb: 245, 245, 245; /*White Smoke*/
+  --foreground-rgb: 0, 0, 0; /*Declarando variavel do texto padrão (preto)*/
+  --background-rgb: 255, 255, 255; /*Variavel do fundo padrão (branco)*/
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --card-background-rgb: 54, 54, 54; /*Cinza*/
+    --foreground-rgb: 255, 255, 255; /*Valor alternativo de texto (branco)*/
+    --background-rgb: 0, 0, 0; /*Fundo preto*/
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: rgb(var(--background-rgb));
+}
+
+.card {
+  color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--card-background-rgb));
+  padding-top: 0.75rem/* 12px */;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.react-icons {
+  color: rgb(var(--foreground-rgb));
+}
+
+input {
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  border-radius: 0.75rem; /*rounded-xl*/
+  padding: 0.5rem; /*8px*/
+}
+
+/*Estilos para a barra de rolagem vertical*/
+::-webkit-scrollbar {
+  width: 8px; /*Largura da barra de rolagem*/
+}
+::-webkit-scrollbar-track {
+  background: none; /*Fundo da área de rolagem*/
+}
+::-webkit-scrollbar-thumb {
+  background-color: #555; /*Cor da barra de rolagem*/
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /*Cor da barra de rolagem ao passar o mouse*/
 }
