@@ -1,4 +1,5 @@
 "use client";
+import React, { Suspense } from "react";
 import { useEffect } from "react";
 import { Loader2, X } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -26,7 +27,16 @@ export default function SearchResult({ children }: SearchResultProps) {
   }, [searchParams]);
 
   return (
-    <>
+    <Suspense
+      fallback={
+        <div className="flex gap-2 self-center">
+          <Loader2 color="#4ade80" strokeWidth={3} className="animate-spin" />
+          <p className="font-medium opacity-80 text-xl text-white">
+            Buscando produtos...
+          </p>
+        </div>
+      }
+    >
       {searchText ? (
         <div className="flex flex-col bg-[#1d1d1d] p-4 gap-4 w-full sm:rounded-lg">
           <div className="flex items-center justify-between">
@@ -42,8 +52,7 @@ export default function SearchResult({ children }: SearchResultProps) {
               </Link>
             )}
           </div>
-
-          {getProducts.isFetching ? (
+          {/*getProducts.isFetching ? (
             <div className="flex gap-2 self-center">
               <Loader2
                 color="#4ade80"
@@ -54,7 +63,8 @@ export default function SearchResult({ children }: SearchResultProps) {
                 Buscando produtos...
               </p>
             </div>
-          ) : products && products.length ? (
+          ) :*/}
+          {products && products.length ? (
             <div className="flex flex-col items-center justify-center space-y-2">
               {products.map((product) => (
                 <ProductCard product={product} key={product._id} />
@@ -69,6 +79,6 @@ export default function SearchResult({ children }: SearchResultProps) {
       ) : (
         children
       )}
-    </>
+    </Suspense>
   );
 }
