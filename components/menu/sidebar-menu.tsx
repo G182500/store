@@ -55,14 +55,14 @@ export default function SidebarMenu() {
             onClick={changeStatus}
           />
 
-          <SearchInput />
+          <SearchInput submitComplement={() => setIsOpen(false)} />
 
           <div id="navigation">
             <p className="font-medium text-sm text-gray-300 md:text-base">
               Navigation
             </p>
             <div className="h-0.5 border-t border-gray-400 mb-2" />
-            <div id="nav-content" className="space-y-2">
+            <div id="nav-content" className="space-y-2 ml-3">
               <Link
                 href="/"
                 onClick={changeStatus}
@@ -123,7 +123,7 @@ export default function SidebarMenu() {
                 Administrator
               </p>
               <div className="h-0.5 border-t border-gray-400 mb-2" />
-              <div id="nav-content" className="space-y-2">
+              <div id="nav-content" className="space-y-2 ml-3">
                 <Link
                   href="/product/new"
                   className="flex font-medium gap-2 items-center text-lg text-gray-300 hover:text-white"
@@ -150,12 +150,12 @@ export default function SidebarMenu() {
             </div>
           )}
 
-          <div id="administrator">
+          <div id="developer">
             <p className="font-medium text-sm text-gray-300 md:text-base">
               Developer
             </p>
             <div className="h-0.5 border-t border-gray-400 mb-2" />
-            <div id="nav-content" className="space-y-2">
+            <div id="nav-content" className="space-y-2 ml-3">
               <Link
                 href="https://www.instagram.com/o_californiaa/?next=%2F"
                 className="flex font-medium gap-2 items-center text-lg text-gray-300 hover:text-white"

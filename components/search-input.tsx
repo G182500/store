@@ -3,22 +3,28 @@ import { Search } from "lucide-react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-export default function SearchInput() {
+interface InputProps {
+  submitComplement?: Function;
+}
+
+export default function SearchInput({ submitComplement }: InputProps) {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
   const pathname = usePathname();
   const router = useRouter();
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, reset } = useForm();
 
   const onSubmit: SubmitHandler<any> = async ({ item }) => {
     if (item) {
       params.set("search", item);
       router.push("/?" + params.toString()); //Comeback HomePage
     } else {
-      params.delete("query");
+      params.delete("search");
       router.push(pathname);
     }
+    reset(); //Clear form-input text
+    if (submitComplement) submitComplement(); //Example: close sidebar-menu
   };
 
   return (
