@@ -1,13 +1,14 @@
 "use client";
 import { Search } from "lucide-react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { Suspense } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface InputProps {
   submitComplement?: Function;
 }
 
-export default function SearchInput({ submitComplement }: InputProps) {
+const Input = ({ submitComplement }: InputProps) => {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
@@ -45,5 +46,13 @@ export default function SearchInput({ submitComplement }: InputProps) {
         strokeWidth={3}
       />
     </form>
+  );
+};
+
+export default function SearchInput({ submitComplement }: InputProps) {
+  return (
+    <Suspense>
+      <Input submitComplement={submitComplement} />
+    </Suspense>
   );
 }

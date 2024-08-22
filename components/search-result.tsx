@@ -11,7 +11,7 @@ interface SearchResultProps {
   children: React.ReactNode; //layout's children
 }
 
-export default function SearchResult({ children }: SearchResultProps) {
+const Search = ({ children }: SearchResultProps) => {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
 
@@ -27,16 +27,7 @@ export default function SearchResult({ children }: SearchResultProps) {
   }, [searchParams]);
 
   return (
-    <Suspense
-      fallback={
-        <div className="flex gap-2 self-center">
-          <Loader2 color="#4ade80" strokeWidth={3} className="animate-spin" />
-          <p className="font-medium opacity-80 text-xl text-white">
-            Buscando produtos...
-          </p>
-        </div>
-      }
-    >
+    <>
       {searchText ? (
         <div className="flex flex-col bg-[#1d1d1d] p-4 gap-4 w-full sm:rounded-lg">
           <div className="flex items-center justify-between">
@@ -52,18 +43,6 @@ export default function SearchResult({ children }: SearchResultProps) {
               </Link>
             )}
           </div>
-          {/*getProducts.isFetching ? (
-            <div className="flex gap-2 self-center">
-              <Loader2
-                color="#4ade80"
-                strokeWidth={3}
-                className="animate-spin"
-              />
-              <p className="font-medium opacity-80 text-xl text-white">
-                Buscando produtos...
-              </p>
-            </div>
-          ) :*/}
           {products && products.length ? (
             <div className="flex flex-col items-center justify-center space-y-2">
               {products.map((product) => (
@@ -77,8 +56,25 @@ export default function SearchResult({ children }: SearchResultProps) {
           )}
         </div>
       ) : (
-        children
+        { children }
       )}
+    </>
+  );
+};
+
+export default function SearchResult({ children }: SearchResultProps) {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex gap-2 self-center">
+          <Loader2 color="#4ade80" strokeWidth={3} className="animate-spin" />
+          <p className="font-medium opacity-80 text-xl text-white">
+            Buscando produtos...
+          </p>
+        </div>
+      }
+    >
+      <Search>{children}</Search>
     </Suspense>
   );
 }
