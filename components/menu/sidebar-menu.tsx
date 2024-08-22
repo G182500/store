@@ -165,7 +165,7 @@ export default function SidebarMenu() {
               </Link>
 
               <Link
-                href=""
+                href="https://www.linkedin.com/in/gabriel-santos-20b4b8197"
                 className="flex font-medium gap-2 items-center text-lg text-gray-300 hover:text-white"
               >
                 <Linkedin size={20} />
