@@ -56,7 +56,7 @@ const Search = ({ children }: SearchResultProps) => {
           )}
         </div>
       ) : (
-        { children }
+        children
       )}
     </>
   );
