@@ -27,14 +27,14 @@ export default function SearchInput() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <input
-        className="bg-[#686868] font-medium py-1 pl-2 rounded-lg w-[94%] text-white placeholder-gray-300"
+        className="bg-[#686868] font-medium py-1.5 pl-2 rounded-lg w-full text-white placeholder-gray-300"
         placeholder="Search item"
         type="text"
         {...register("item")}
       />
       <Search
         color="white"
-        className="absolute end-[6%]"
+        className="absolute end-[5%]"
         size={20}
         strokeWidth={3}
       />

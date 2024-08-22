@@ -26,7 +26,7 @@ export default function SidebarMenu() {
   const isAdmin = true;
 
   const buttonStyle = "text-gray-300 hover:text-white hover:cursor-pointer";
-  const animation = isOpen ? "p-3 w-80" : "w-0 p-0 pointer-events-none";
+  const animation = isOpen ? "py-3 px-4 w-80" : "w-0 p-0 pointer-events-none";
 
   const opacityEffect = isOpen
     ? "opacity-100 duration-1000"

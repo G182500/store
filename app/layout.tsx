@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Header from "@/components/menu/header";
+import SearchResult from "@/components/search-result";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -14,9 +16,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  //container does not center itself automatically (mx-auto)
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <main className="flex min-h-screen flex-col items-center justify-between">
+          <Header />
+          <div className="container flex mx-auto px-2 mt-16">
+            <SearchResult>{children}</SearchResult>
+          </div>
+        </main>
+      </body>
     </html>
   );
 }

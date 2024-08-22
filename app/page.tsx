@@ -1,15 +1,14 @@
-import Header from "@/components/menu/header";
+import { Loader2 } from "lucide-react";
 
-interface HomeProps {
-  children: React.ReactNode;
-}
-
-//container does not center itself automatically (mx-auto)
-export default function Home({ children }: HomeProps) {
+export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
-      <Header />
-      <div className="container flex mx-auto">{children}</div>
-    </main>
+    <div className="flex justify-center w-full">
+      <div className="flex gap-2">
+        <Loader2 color="#4ade80" strokeWidth={3} className="animate-spin" />
+        <p className="font-medium opacity-80 text-xl text-white">
+          Buscando produtos...
+        </p>
+      </div>
+    </div>
   );
 }
