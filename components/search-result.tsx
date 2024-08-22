@@ -4,6 +4,7 @@ import { Loader2, X } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useGetProductsByName } from "@/services/product/use-get-by-name";
 import Link from "next/link";
+import ProductCard from "./product-card";
 
 interface SearchResultProps {
   children: React.ReactNode; //layout's children
@@ -41,35 +42,29 @@ export default function SearchResult({ children }: SearchResultProps) {
               </Link>
             )}
           </div>
-          <div className="flex justify-center">
-            {getProducts.isFetching ? (
-              <div className="flex gap-2">
-                <Loader2
-                  color="#4ade80"
-                  strokeWidth={3}
-                  className="animate-spin"
-                />
-                <p className="font-medium opacity-80 text-xl text-white">
-                  Buscando produtos...
-                </p>
-              </div>
-            ) : products && products.length ? (
-              <>
-                {products.map((product) => (
-                  <p
-                    className="font-medium opacity-80 text-xl text-white"
-                    key={product._id}
-                  >
-                    {product.title}
-                  </p>
-                ))}
-              </>
-            ) : (
+
+          {getProducts.isFetching ? (
+            <div className="flex gap-2 self-center">
+              <Loader2
+                color="#4ade80"
+                strokeWidth={3}
+                className="animate-spin"
+              />
               <p className="font-medium opacity-80 text-xl text-white">
-                {getProducts.data?.message}
+                Buscando produtos...
               </p>
-            )}
-          </div>
+            </div>
+          ) : products && products.length ? (
+            <div className="flex flex-col items-center justify-center space-y-2">
+              {products.map((product) => (
+                <ProductCard product={product} key={product._id} />
+              ))}
+            </div>
+          ) : (
+            <p className="font-medium opacity-80 text-xl text-white self-center">
+              {getProducts.data?.message}
+            </p>
+          )}
         </div>
       ) : (
         children
