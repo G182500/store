@@ -50,7 +50,7 @@ const Search = ({ children }: SearchResultProps) => {
                 strokeWidth={3}
                 className="animate-spin"
               />
-              <p className="font-medium opacity-80 text-xl text-white">
+              <p className="font-medium opacity-80 text-xl text-white mb-5">
                 Buscando produtos...
               </p>
             </div>
@@ -77,16 +77,7 @@ const Search = ({ children }: SearchResultProps) => {
 
 export default function SearchResult({ children }: SearchResultProps) {
   return (
-    <Suspense
-      fallback={
-        <div className="flex gap-2 self-center">
-          <Loader2 color="#4ade80" strokeWidth={3} className="animate-spin" />
-          <p className="font-medium opacity-80 text-xl text-white">
-            Buscando produtos...
-          </p>
-        </div>
-      }
-    >
+    <Suspense>
       <Search>{children}</Search>
     </Suspense>
   );
