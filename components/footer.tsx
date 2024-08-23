@@ -5,7 +5,7 @@ const Footer = () => {
   //const linkStyle = "flex font-medium gap-2 items-center text-xl text-gray-300 hover:text-white";
 
   return (
-    <footer className="flex flex-col bg-[#1d1d1d] items-center px-2 py-6 w-full">
+    <footer className="flex flex-col bg-[#1d1d1d] items-center mt-2 px-2 py-6 w-full">
       {/*<div className="flex justify-around">
         <Link
           href="https://www.instagram.com/o_californiaa/?next=%2F"

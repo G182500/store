@@ -25,7 +25,7 @@ export default function RootLayout({
         <QueryCliProvider>
           <main className="flex min-h-screen flex-col items-center justify-between">
             <Header />
-            <div className="container flex mx-auto mt-16">
+            <div className="container flex flex-col mx-auto mt-16 space-y-2">
               <SearchResult>{children}</SearchResult>
             </div>
             <Footer />
