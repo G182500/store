@@ -26,7 +26,7 @@ export default function SidebarMenu() {
   const isAdmin = true;
 
   const buttonStyle = "text-gray-300 hover:text-white hover:cursor-pointer";
-  const animation = isOpen ? "py-3 px-4 w-80" : "w-0 p-0 pointer-events-none";
+  const animation = isOpen ? "py-3 px-4 w-96" : "w-0 p-0 pointer-events-none";
 
   const opacityEffect = isOpen
     ? "opacity-100 duration-1000"
@@ -66,10 +66,11 @@ export default function SidebarMenu() {
               <Link
                 href="/"
                 onClick={changeStatus}
-                className={`flex font-medium gap-2 items-center text-lg ${pathname === "/"
-                  ? "text-green-400 hover:cursor-default"
-                  : "text-gray-300 hover:text-white"
-                  }`}
+                className={`flex font-medium gap-2 items-center text-lg ${
+                  pathname === "/"
+                    ? "text-green-400 hover:cursor-default"
+                    : "text-gray-300 hover:text-white"
+                }`}
               >
                 <HomeIcon size={20} />
                 Home
@@ -78,10 +79,11 @@ export default function SidebarMenu() {
               <Link
                 href="/cart"
                 onClick={changeStatus}
-                className={`flex font-medium gap-2 items-center text-lg ${pathname === "/cart"
-                  ? "text-green-400 hover:cursor-default"
-                  : "text-gray-300 hover:text-white"
-                  }`}
+                className={`flex font-medium gap-2 items-center text-lg ${
+                  pathname === "/cart"
+                    ? "text-green-400 hover:cursor-default"
+                    : "text-gray-300 hover:text-white"
+                }`}
               >
                 <ShoppingCart size={20} />
                 Cart
@@ -90,10 +92,11 @@ export default function SidebarMenu() {
               <Link
                 href="/profile"
                 onClick={changeStatus}
-                className={`flex font-medium gap-2 items-center text-lg ${pathname === "/profile"
-                  ? "text-green-400 hover:cursor-default"
-                  : "text-gray-300 hover:text-white"
-                  }`}
+                className={`flex font-medium gap-2 items-center text-lg ${
+                  pathname === "/profile"
+                    ? "text-green-400 hover:cursor-default"
+                    : "text-gray-300 hover:text-white"
+                }`}
               >
                 <User2 size={20} />
                 Profile
@@ -102,10 +105,11 @@ export default function SidebarMenu() {
               <Link
                 href="/about"
                 onClick={changeStatus}
-                className={`flex font-medium gap-2 items-center text-lg ${pathname === "/about"
-                  ? "text-green-400 hover:cursor-default"
-                  : "text-gray-300 hover:text-white"
-                  }`}
+                className={`flex font-medium gap-2 items-center text-lg ${
+                  pathname === "/about"
+                    ? "text-green-400 hover:cursor-default"
+                    : "text-gray-300 hover:text-white"
+                }`}
               >
                 <TextSearch size={21} />
                 About
@@ -123,10 +127,11 @@ export default function SidebarMenu() {
                 <Link
                   href="/product/new"
                   onClick={changeStatus}
-                  className={`flex font-medium gap-2 items-center text-lg ${pathname === "/product/new"
-                    ? "text-green-400 hover:cursor-default"
-                    : "text-gray-300 hover:text-white"
-                    }`}
+                  className={`flex font-medium gap-2 items-center text-lg ${
+                    pathname === "/product/new"
+                      ? "text-green-400 hover:cursor-default"
+                      : "text-gray-300 hover:text-white"
+                  }`}
                 >
                   <SquarePlus size={22} /> New
                 </Link>

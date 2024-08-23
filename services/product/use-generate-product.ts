@@ -12,8 +12,7 @@ interface GenerateProductOutput {
 export const useGenerateProduct = () =>
   useMutation({
     mutationFn: async ({ product }: GenerateProductInput) => {
-      if (!product.images_url)
-        product.images_url = "freddyjason.jpg;";
+      if (!product.images_url) product.images_url = "freddyjason.jpg;";
 
       const resp = await fetch(`/api/product/new`, {
         method: "POST",

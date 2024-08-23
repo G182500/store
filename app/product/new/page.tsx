@@ -17,9 +17,12 @@ export default function NewProduct() {
 
   const generateMutation = useGenerateProduct();
 
-  const inputStyle = "bg-[#686868] font-medium py-1.5 pl-2 rounded-lg w-full text-white placeholder-gray-300"
+  const inputStyle =
+    "bg-[#686868] font-medium py-1.5 pl-2 rounded-lg w-full text-white placeholder-gray-300";
 
-  const formErrorMessages = Object.keys(formState.errors).map((key) => formState.errors[key as keyof IProduct]?.message);
+  const formErrorMessages = Object.keys(formState.errors).map(
+    (key) => formState.errors[key as keyof IProduct]?.message
+  );
 
   const onSubmit: SubmitHandler<IProduct> = async (data) => {
     try {
@@ -47,7 +50,10 @@ export default function NewProduct() {
         />
       </div>
 
-      <form className="flex flex-col space-y-4" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="flex flex-col space-y-4"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <input
           className={inputStyle}
           placeholder="Title"
@@ -77,8 +83,8 @@ export default function NewProduct() {
         />
 
         <button
-          //disabled={!formState.isValid}
-          className="flex bg-[#1b5a8d] font-semibold items-center justify-center py-2 rounded-lg w-full"
+          disabled={!formState.isValid}
+          className="flex bg-[#1b5a8d] font-semibold items-center justify-center py-2 rounded-lg w-full disabled:opacity-60"
           type="submit"
         >
           SUBMIT
@@ -97,4 +103,4 @@ export default function NewProduct() {
       </form>
     </div>
   );
-};
+}
