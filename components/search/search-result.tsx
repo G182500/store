@@ -5,7 +5,7 @@ import { Loader2, X } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useGetProductsByName } from "@/services/product/use-get-by-name";
 import Link from "next/link";
-import ProductCard from "./product-card";
+import ProductCard from "../product-card";
 
 interface SearchResultProps {
   children: React.ReactNode; //layout's children
@@ -36,7 +36,7 @@ const Search = ({ children }: SearchResultProps) => {
             <p className="font-semibold text-xl md:text-2xl">Search Results</p>
             <Link
               href="/"
-              className="flex font-semibold items-center bg-orange-600 gap-1 text-sm rounded-md p-1.5"
+              className="flex font-semibold items-center bg-orange-600 gap-1 text-sm rounded-md p-1.5 min-w-20"
               onClick={() => params.delete("search")}
             >
               <X size={22} />

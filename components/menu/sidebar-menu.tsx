@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import SearchInput from "../search-input";
+import SearchInput from "../search/search-input";
 import {
   HomeIcon,
   MenuIcon,
@@ -26,7 +26,9 @@ export default function SidebarMenu() {
   const isAdmin = true;
 
   const buttonStyle = "text-gray-300 hover:text-white hover:cursor-pointer";
-  const animation = isOpen ? "py-3 px-4 w-96" : "w-0 p-0 pointer-events-none";
+  const animation = isOpen
+    ? "py-3 px-4 w-[90%] sm:w-96"
+    : "w-0 p-0 pointer-events-none";
 
   const opacityEffect = isOpen
     ? "opacity-100 duration-1000"

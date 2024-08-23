@@ -1,6 +1,7 @@
 import { IProduct } from "@/interfaces/product";
 import { useRouter } from "next/navigation";
 import { ImageIcon, ArrowRightCircle } from "lucide-react";
+import formatToCurrency from "@/utils/format-currency";
 import Image from "next/image";
 
 export default function ProductCard({ product }: { product: IProduct }) {
@@ -10,17 +11,15 @@ export default function ProductCard({ product }: { product: IProduct }) {
   const coverImage = product.images_url ? product.images_url.split(";")[0] : "";
   const imgSize = "h-40 w-72";
 
-  const fees = (
-    Math.round(product.price / 2) +
-    product.price * 0.06
-  ).toLocaleString("pt-br", {
-    maximumFractionDigits: 2,
-  });
+  const price = formatToCurrency(product.price);
+  const fees = formatToCurrency(
+    Math.round(product.price / 2) + product.price * 0.06
+  );
 
   return (
     <div
       title={product.title}
-      className="flex bg-[#353535] rounded-md hover:opacity-70 hover:cursor-pointer"
+      className="flex bg-[#353535] rounded-md hover:opacity-70 hover:cursor-pointer w-full"
       onClick={() => router.push(`/product/${product._id}`)}
     >
       {coverImage ? (
@@ -40,9 +39,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
       <div className="flex flex-col px-3 py-2 justify-around w-full">
         <p className="font-semibold text-sm line-clamp-2">{product.title}</p>
         <div id="prices">
-          <p className="font-semibold text-2xl text-green-400">
-            R$ {product.price}
-          </p>
+          <p className="font-semibold text-2xl text-green-400">R$ {price}</p>
           <p className="font-medium ml-1 opacity-75 text-white text-xs">
             ou 2x de R$ {fees}
           </p>

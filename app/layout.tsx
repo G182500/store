@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "@/components/menu/header";
-import SearchResult from "@/components/search-result";
+import SearchResult from "@/components/search/search-result";
 import QueryCliProvider from "@/contexts/query-client-provider";
 import "./globals.css";
 
