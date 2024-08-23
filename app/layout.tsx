@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Header from "@/components/menu/header";
 import SearchResult from "@/components/search/search-result";
 import QueryCliProvider from "@/contexts/query-client-provider";
+import Footer from "@/components/footer";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,6 +28,7 @@ export default function RootLayout({
             <div className="container flex mx-auto mt-16">
               <SearchResult>{children}</SearchResult>
             </div>
+            <Footer />
           </main>
         </QueryCliProvider>
       </body>
