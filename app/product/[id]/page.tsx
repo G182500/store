@@ -21,7 +21,7 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
     <div className="flex flex-col bg-[#1d1d1d] p-4 gap-4 w-full sm:rounded-lg">
       <div className="flex items-center justify-between">
         <p className="font-semibold text-xl md:text-2xl">Product Detail</p>
-        <span className="font-semibold bg-orange-700 h-fit text-sm rounded-md p-1.5">
+        <span className="font-semibold bg-orange-600 h-fit text-sm rounded-md p-1.5">
           {product?.category}
         </span>
       </div>
