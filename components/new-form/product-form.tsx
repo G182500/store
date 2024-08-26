@@ -18,7 +18,7 @@ export default function ProductForm() {
   const generateMutation = useGenerateProduct();
 
   const inputStyle =
-    "bg-[#686868] font-medium py-1.5 pl-2 rounded-lg w-full text-white placeholder-gray-300";
+    "bg-[#686868] font-medium py-1.5 pl-2 rounded-lg text-white placeholder-gray-300";
 
   const formErrorMessages = Object.keys(formState.errors).map(
     (key) => formState.errors[key as keyof IProduct]?.message
@@ -42,11 +42,12 @@ export default function ProductForm() {
 
   return (
     <div className="flex flex-col bg-[#1d1d1d] p-4 gap-4 w-full sm:rounded-lg">
-      <div className="flex items-center space-y-1">
+      <div className="flex items-center space-x-2">
         <p className="font-semibold text-xl md:text-2xl">New Product</p>
         <Loader2
           className={generateMutation.isPending ? "animate-spin" : "hidden"}
           color="#4ade80"
+          strokeWidth={3}
         />
       </div>
 
@@ -61,25 +62,38 @@ export default function ProductForm() {
           {...register("title", { required: "Title is required" })}
         />
 
-        <select
-          className={`border-r-4 border-[#686868] ${inputStyle}`}
-          {...register("category", { required: true })}
-        >
-          <option value="Compact Disc">Compact Disc</option>
-          <option value="Movie">Movie</option>
-        </select>
+        <div className="flex space-x-2">
+          <input
+            className={`${inputStyle} w-40`}
+            placeholder="R$"
+            type="number"
+            {...register("price", {
+              required: "Price is required",
+              min: 1,
+              max: 999,
+            })}
+          />
 
-        <input
-          className={inputStyle}
-          placeholder="R$"
-          type="number"
-          {...register("price", { required: "Price is required" })}
-        />
+          <select
+            className={`border-r-4 border-[#686868] w-full ${inputStyle}`}
+            {...register("category", { required: true })}
+          >
+            <option value="Compact Disc">Compact Disc</option>
+            <option value="Movie">Movie</option>
+          </select>
+        </div>
 
         <textarea
           className={`${inputStyle} h-40`}
           {...register("description")}
           placeholder="Description"
+        />
+
+        <input
+          className={inputStyle}
+          placeholder="Quantity"
+          type="number"
+          {...register("quantity")}
         />
 
         <button
