@@ -3,9 +3,8 @@ import ContentArea from "@/components/content-area";
 import ProductCard from "@/components/product-card";
 import { useGetProductsByCategory } from "@/services/product/use-get-by-category";
 import { Loader2 } from "lucide-react";
-import { Suspense } from "react";
 
-const Search = () => {
+export default function Home() {
   const getProducts = useGetProductsByCategory("Compact Disc", {
     enabled: true,
   });
@@ -42,13 +41,4 @@ const Search = () => {
       )}
     </ContentArea>
   );
-};
-
-export default function Home() {
-  /*return (
-    <Suspense>
-      <Search />
-    </Suspense>
-  );*/
-  return <Search />;
 }
