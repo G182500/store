@@ -8,7 +8,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
   const router = useRouter();
 
   //Futuramente um serviço como Google Cloud Service, para salvar as imagens
-  const coverImage = product.images_url ? product.images_url.split(";")[0] : "";
+  const coverImage = product.images_url;
   const imgSize = "h-40 w-72";
 
   const price = formatToCurrency(product.price);
