@@ -4,18 +4,19 @@ import { useEffect } from "react";
 import { Loader2, X } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useGetProductsByName } from "@/services/product/use-get-by-name";
-import Link from "next/link";
 import ProductCard from "../product-card";
+import ContentArea from "../content-area";
+import Link from "next/link";
 
 interface SearchResultProps {
-  children: React.ReactNode; //layout's children
+  children: React.ReactNode;
 }
 
 const Search = ({ children }: SearchResultProps) => {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
-
   const searchText = searchParams.get("search");
+
   const getProducts = useGetProductsByName(searchText ? searchText : "", {
     enabled: false,
   });
@@ -26,31 +27,34 @@ const Search = ({ children }: SearchResultProps) => {
     if (searchText) getProducts.refetch();
   }, [searchParams]);
 
+  const header = (
+    <>
+      <p className="font-semibold text-xl md:text-2xl">Search Results</p>
+      <Link
+        href="/"
+        className="flex font-semibold items-center bg-orange-600 gap-1 text-sm rounded-md p-1.5 min-w-20"
+        onClick={() => params.delete("search")}
+      >
+        <X size={22} />
+        {searchText}
+      </Link>
+    </>
+  );
+
   return (
     <>
       {!searchText ? (
         children
       ) : (
-        <div className="flex flex-col bg-[#1d1d1d] p-4 gap-4 w-full sm:rounded-lg">
-          <div className="flex items-center justify-between">
-            <p className="font-semibold text-xl md:text-2xl">Search Results</p>
-            <Link
-              href="/"
-              className="flex font-semibold items-center bg-orange-600 gap-1 text-sm rounded-md p-1.5 min-w-20"
-              onClick={() => params.delete("search")}
-            >
-              <X size={22} />
-              {searchText}
-            </Link>
-          </div>
-          {getProducts.isFetching ? (
-            <div className="flex gap-2 justify-center w-full">
+        <ContentArea header={header}>
+          {getProducts.isFetching || !products ? (
+            <div className="flex h-28 items-center justify-center space-x-2 w-full">
               <Loader2
                 color="#4ade80"
                 strokeWidth={3}
                 className="animate-spin"
               />
-              <p className="font-medium opacity-80 text-xl text-white mb-5">
+              <p className="font-medium opacity-80 text-xl text-white">
                 Buscando produtos...
               </p>
             </div>
@@ -69,7 +73,7 @@ const Search = ({ children }: SearchResultProps) => {
               )}
             </>
           )}
-        </div>
+        </ContentArea>
       )}
     </>
   );
