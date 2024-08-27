@@ -14,7 +14,7 @@ export async function GET(req: Request, { params }: { params: Params }) {
 
     const { category } = params;
     const productsByCategory = await client.query(
-      `SELECT * FROM product WHERE category LIKE '%${category}%' ORDER BY title`
+      `SELECT * FROM product WHERE category = '${category}' ORDER BY RANDOM() LIMIT 6`
     );
 
     client.release(); //close connection
