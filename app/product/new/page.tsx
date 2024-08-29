@@ -1,5 +1,5 @@
-import ProductForm from "@/components/new-form/product-form";
-import UserForm from "@/components/new-form/user-form";
+import ProductForm from "@/components/form/product-form";
+import UserForm from "@/components/form/user-form";
 
 export default function NewPage() {
   return (

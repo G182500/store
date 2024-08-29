@@ -1,27 +1,29 @@
 "use client";
-import Image from "next/image";
-import { ImageIcon, Loader2 } from "lucide-react";
+import { Loader2, ShoppingCart } from "lucide-react";
 import { useGetProductById } from "@/services/product/use-get-by-id";
 import formatToCurrency from "@/utils/format-currency";
 import ContentArea from "@/components/content-area";
-import Skeleton from "@/components/skeleton";
+import { useForm } from "react-hook-form";
+import QuantityInput from "@/components/form/quantity-input";
+import ImageComponent from "@/components/image";
 
 export default function ProductDetail({ params }: { params: { id: string } }) {
   const getProduct = useGetProductById(params.id, {
     enabled: true,
   });
+  const { register, handleSubmit, getValues, setValue } = useForm<{
+    quantity: number;
+  }>();
 
   const product = getProduct.data?.product;
-
   //Futuramente um serviço como Google Cloud Service, para salvar as imagens
   const coverImage = product?.images_url;
-
   const imgSize = "h-80 w-80 rounded-lg";
 
   const header = (
     <>
       <p className="font-semibold text-xl md:text-2xl">Product Detail</p>
-      {product?.category && (
+      {product?.category && !getProduct.isFetching && (
         <span className="font-semibold bg-orange-600 text-sm rounded-md p-1.5">
           {product?.category}
         </span>
@@ -31,11 +33,16 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
 
   return (
     <ContentArea header={header}>
-      <div className="flex flex-col items-center justify-center md:flex-row">
+      <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
+        <ImageComponent
+          src={`/imgs/products/${coverImage}`}
+          alt={product ? product.title : ""}
+          size={imgSize}
+          isLoading={!product || getProduct.isFetching}
+        />
         {!product || getProduct.isFetching ? (
           <>
-            <Skeleton className={`bg-[#4e4e4e] animate-pulse ${imgSize}`} />
-            <div className="flex h-28 items-center justify-center space-x-2 w-full">
+            <div className="flex h-14 items-center justify-center space-x-2 w-full">
               <Loader2
                 color="#4ade80"
                 strokeWidth={3}
@@ -48,40 +55,44 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
           </>
         ) : (
           <>
-            {coverImage ? (
-              <div
-                className={`relative self-center border-2 border-[#4e4e4e] ${imgSize}`}
-              >
-                <Image
-                  fill
-                  src={`/imgs/products/${coverImage}`}
-                  alt={product.title}
-                  className="absolute object-cover rounded-md"
-                />
-              </div>
-            ) : (
-              <div
-                className={`flex flex-col items-center justify-center border-2 border-[#4e4e4e] ${imgSize}`}
-              >
-                <ImageIcon size={200} color="#9c9c9c" />
-                <p className="font-medium text-xl text-[#9c9c9c]">
-                  No image available
-                </p>
-              </div>
-            )}
-            <div className="grid grid-cols-3 space-x-2 mt-4 w-full">
-              <p className="font-medium col-span-2 text-left opacity-80 text-xl text-white">
+            <div className="grid grid-cols-3 gap-2 w-full">
+              <p className="font-medium opacity-80 text-left col-span-2 text-xl text-white">
                 {product?.title}
               </p>
-              <p className="font-semibold text-right text-2xl text-green-400">
-                R$ {formatToCurrency(product?.price)}
-              </p>
+              <div className="flex flex-col items-center">
+                <p className="font-semibold text-2xl text-green-400">
+                  R$ {formatToCurrency(product?.price)}
+                </p>
+                <p className="font-semibold text-sm">
+                  Disponíveis: {product?.quantity}
+                </p>
+              </div>
             </div>
-            <div className="flex justify-between w-full">
-              <p>AAA</p>
-              <p className="font-semibold italic text-sm">
-                Disponíveis: {product?.quantity}
-              </p>
+
+            <div className="flex space-x-4 w-full">
+              <QuantityInput
+                register={register("quantity", {
+                  min: 1,
+                  max: product?.quantity,
+                })}
+              />
+              <button
+                className="flex bg-[#1b5a8d] items-center justify-center gap-2 py-3 rounded-md w-full"
+                type="submit"
+              >
+                <ShoppingCart size={24} />
+                <p className="font-semibold">ADD TO CART</p>
+              </button>
+            </div>
+
+            <div className="flex flex-col space-y-1">
+              <p className="font-semibold text-xs">DESCRIPTION</p>
+              <div className="bg-[#3a3a3a] p-2 rounded-lg min-h-36">
+                {/*whitespace-pre-line -> Navegador interprete '\n' no layout*/}
+                <p className="font-semibold opacity-70 text-justify text-xs whitespace-pre-line">
+                  {product?.description}
+                </p>
+              </div>
             </div>
           </>
         )}
