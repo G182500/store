@@ -35,10 +35,11 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
     <ContentArea header={header}>
       <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
         <ImageComponent
-          src={`/imgs/products/${coverImage}`}
           alt={product ? product.title : ""}
-          size={imgSize}
+          fontSize="text-xl"
+          imgSize={imgSize}
           isLoading={!product || getProduct.isFetching}
+          src={`/imgs/products/${coverImage}`}
         />
         {!product || getProduct.isFetching ? (
           <>

@@ -4,40 +4,36 @@ import Skeleton from "./skeleton";
 
 interface ImageProps {
   src: string;
-  size: string;
+  imgSize: string;
+  fontSize: string;
   alt: string;
   isLoading: boolean;
 }
 
-export default function ImageComponent({
-  src,
-  size,
-  alt,
-  isLoading,
-}: ImageProps) {
+export default function ImageComponent(props: ImageProps) {
   return (
     <>
-      {isLoading ? (
-        <Skeleton className={`bg-[#4e4e4e] animate-pulse ${size}`} />
+      {props.isLoading ? (
+        <Skeleton className={`bg-[#4e4e4e] animate-pulse ${props.imgSize}`} />
       ) : (
         <>
-          {src ? (
+          {props.src ? (
             <div
-              className={`relative self-center border-2 border-[#4e4e4e] ${size}`}
+              className={`relative self-center border-2 border-[#4e4e4e] ${props.imgSize}`}
             >
               <Image
                 fill
-                src={src}
-                alt={alt}
+                src={props.src}
+                alt={props.alt}
                 className="absolute object-cover rounded-md"
               />
             </div>
           ) : (
             <div
-              className={`flex flex-col items-center justify-center border-2 border-[#4e4e4e] ${size}`}
+              className={`flex flex-col items-center justify-center border-2 border-[#4e4e4e] ${props.imgSize}`}
             >
-              <ImageIcon className="w-[70%]" size={200} color="#9c9c9c" />
-              <p className="font-medium text-xl text-[#9c9c9c]">
+              <ImageIcon className="h-[50%] w-[50%]" color="#9c9c9c" />
+              <p className={`font-medium text-[#9c9c9c] ${props.fontSize}`}>
                 No image available
               </p>
             </div>
