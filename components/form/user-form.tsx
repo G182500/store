@@ -1,6 +1,6 @@
 "use client";
 import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
-import { IProduct } from "@/interfaces/product";
+import { IUser } from "@/interfaces/user";
 import { useGenerateUser } from "@/services/user/use-generate-user";
 import { Loader2 } from "lucide-react";
 import PasswordInput from "./password-input";
@@ -22,11 +22,10 @@ export default function UserForm() {
     "bg-[#686868] font-medium py-1.5 pl-2 rounded-lg text-white placeholder-gray-300";
 
   const formErrorMessages = Object.keys(formState.errors).map(
-    (key) => formState.errors[key as keyof IProduct]?.message as string
+    (key) => formState.errors[key as keyof IUser]?.message as string
   );
 
-  //const onSubmit: SubmitHandler<IProduct> = async (data) => {
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<IUser> = async (data) => {
     try {
       const resp = await generateUserMutation.mutateAsync({
         user: data,
