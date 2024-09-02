@@ -56,15 +56,15 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
           </>
         ) : (
           <>
-            <div className="grid grid-cols-3 gap-2 w-full">
-              <p className="font-medium opacity-80 text-left col-span-2 text-xl text-white">
+            <div className="flex flex-col space-y-1 w-full">
+              <p className="font-medium opacity-80 text-left text-white text-xl">
                 {product?.title}
               </p>
-              <div className="flex flex-col items-center">
-                <p className="font-semibold text-2xl text-green-400">
+              <div className="flex flex-col items-start">
+                <p className="font-semibold text-3xl text-green-400">
                   R$ {formatToCurrency(product?.price)}
                 </p>
-                <p className="font-semibold text-sm">
+                <p className="font-semibold text-xs">
                   Disponíveis: {product?.quantity}
                 </p>
               </div>
@@ -88,10 +88,8 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
 
             <div className="flex flex-col space-y-1">
               <p className="font-semibold text-xs">DESCRIPTION</p>
-              <div className="bg-[#3a3a3a] p-2 rounded-lg min-h-36">
-                <p className="font-semibold opacity-70 text-justify text-xs whitespace-pre-line">
-                  {product?.description}
-                </p>
+              <div className="bg-[#3a3a3a] p-2 rounded-lg min-h-36 font-semibold opacity-70 text-justify text-xs whitespace-pre-line">
+                {product?.description}
               </div>
             </div>
           </>

@@ -15,7 +15,7 @@ export default function ProductForm() {
     getValues,
   } = useForm<IProduct>();
 
-  const generateMutation = useGenerateProduct();
+  const generateProductMutation = useGenerateProduct();
 
   const inputStyle =
     "bg-[#686868] font-medium py-1.5 pl-2 rounded-lg text-white placeholder-gray-300";
@@ -26,12 +26,11 @@ export default function ProductForm() {
 
   const onSubmit: SubmitHandler<IProduct> = async (data) => {
     try {
-      console.log(data);
-      /*const resp = await generateProductMutation.mutateAsync({
+      const resp = await generateProductMutation.mutateAsync({
         product: data,
       });
       if (resp.status == "success") reset();
-      toast({
+      /*toast({
         variant: resp.status,
         title: resp.message,
       });*/
@@ -45,7 +44,9 @@ export default function ProductForm() {
       <div className="flex items-center space-x-2">
         <p className="font-semibold text-xl md:text-2xl">New Product</p>
         <Loader2
-          className={generateMutation.isPending ? "animate-spin" : "hidden"}
+          className={
+            generateProductMutation.isPending ? "animate-spin" : "hidden"
+          }
           color="#4ade80"
           strokeWidth={3}
         />
@@ -84,7 +85,7 @@ export default function ProductForm() {
         </div>
 
         <textarea
-          className={`${inputStyle} h-40`}
+          className={`${inputStyle} h-40 overflow-auto`}
           {...register("description")}
           placeholder="Description"
         />

@@ -3,13 +3,17 @@ import ContentArea from "@/components/content-area";
 import ProductCard from "@/components/product-card";
 import { useGetProductsByCategory } from "@/services/product/use-get-by-category";
 import { Loader2 } from "lucide-react";
+import { useEffect } from "react";
 
 export default function Home() {
   const getProducts = useGetProductsByCategory("Compact Disc", {
-    enabled: true,
+    enabled: false,
   });
 
   const products = getProducts.data?.products;
+  useEffect(() => {
+    if (!products) getProducts.refetch();
+  }, []);
 
   const header = (
     <p className="font-semibold text-xl md:text-2xl">Compact Disc</p>
