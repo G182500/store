@@ -89,7 +89,6 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
             <div className="flex flex-col space-y-1">
               <p className="font-semibold text-xs">DESCRIPTION</p>
               <div className="bg-[#3a3a3a] p-2 rounded-lg min-h-36">
-                {/*whitespace-pre-line -> Navegador interprete '\n' no layout*/}
                 <p className="font-semibold opacity-70 text-justify text-xs whitespace-pre-line">
                   {product?.description}
                 </p>
@@ -101,3 +100,4 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
     </ContentArea>
   );
 }
+//whitespace-pre-line -> Navegador interprete '\n' no layout

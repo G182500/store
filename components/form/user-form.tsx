@@ -1,8 +1,8 @@
 "use client";
 import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
 import { IProduct } from "@/interfaces/product";
-import { useGenerateProduct } from "@/services/product/use-generate-product";
-import { EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
+import { useGenerateUser } from "@/services/user/use-generate-user";
+import { Loader2 } from "lucide-react";
 import PasswordInput from "./password-input";
 
 export default function UserForm() {
@@ -16,7 +16,7 @@ export default function UserForm() {
     getValues,
   } = useForm<any>();
 
-  const generateMutation = useGenerateProduct();
+  const generateUserMutation = useGenerateUser();
 
   const inputStyle =
     "bg-[#686868] font-medium py-1.5 pl-2 rounded-lg text-white placeholder-gray-300";
@@ -25,17 +25,13 @@ export default function UserForm() {
     (key) => formState.errors[key as keyof IProduct]?.message as string
   );
 
-  const onSubmit: SubmitHandler<IProduct> = async (data) => {
+  //const onSubmit: SubmitHandler<IProduct> = async (data) => {
+  const onSubmit = async (data) => {
     try {
-      console.log(data);
-      /*const resp = await generateProductMutation.mutateAsync({
-        product: data,
+      const resp = await generateUserMutation.mutateAsync({
+        user: data,
       });
       if (resp.status == "success") reset();
-      toast({
-        variant: resp.status,
-        title: resp.message,
-      });*/
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +42,7 @@ export default function UserForm() {
       <div className="flex items-center space-x-2">
         <p className="font-semibold text-xl md:text-2xl">New User</p>
         <Loader2
-          className={generateMutation.isPending ? "animate-spin" : "hidden"}
+          className={generateUserMutation.isPending ? "animate-spin" : "hidden"}
           color="#4ade80"
           strokeWidth={3}
         />
@@ -68,13 +64,13 @@ export default function UserForm() {
             className={`${inputStyle} w-[50%]`}
             placeholder="First Name"
             type="text"
-            {...register("firstName", { required: "First Name is required." })}
+            {...register("first_name", { required: "First Name is required." })}
           />
           <input
             className={`${inputStyle} w-[50%]`}
             placeholder="Last Name"
             type="text"
-            {...register("lastName", { required: "Last Name is required." })}
+            {...register("last_name", { required: "Last Name is required." })}
           />
         </div>
 
